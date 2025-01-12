@@ -8,3 +8,8 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+.navibar {
+    padding: 10px;
+    background: #EFEFEF;
+}
