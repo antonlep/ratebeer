@@ -1,5 +1,6 @@
 class Brewery < ApplicationRecord
-  has_many :beers
+  has_many :beers, dependent: :destroy
+  has_many :ratings, through: :beers
 
   def print_report
     puts name
@@ -10,5 +11,9 @@ class Brewery < ApplicationRecord
   def restart
     self.year = 2025
     puts "changed year to #{year}"
+  end
+
+  def average_rating
+    ratings.average(:score)
   end
 end
