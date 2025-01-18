@@ -9,8 +9,16 @@ class RatingsController < ApplicationController
   end
 
   def create
-    Rating.create params.require(:rating).permit(:score, :beer_id)
-    redirect_to ratings_path
+    # otetaan luotu reittaus muuttujaan
+    @rating = Rating.new params.require(:rating).permit(:score, :beer_id)
+    # talletetaan tehty reittaus sessioon
+    @rating.user = current_user
+    if @rating.save
+      redirect_to user_path current_user
+    else
+      @beers = Beer.all
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def destroy
