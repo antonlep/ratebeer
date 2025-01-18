@@ -11,14 +11,24 @@
     Has made <%= pluralize @user.ratings.count, "rating" %>, average rating <%= @user.average_rating %>
   <% end %>
 </p>
-<h2>ratings:</h2>
+<h3>ratings</h3>
+
 <ul>
-  <% if not @user.ratings.empty? %>
-    <% @user.ratings.each do |rating| %>
-      <li> <%= rating %> <%= button_to 'delete', rating, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } } %> </li>
-    <% end %>
+  <% @user.ratings.each do |rating| %>
+    <li> <%= rating %> <%= button_to 'delete', rating, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } } %> </li>
   <% end %>
 </ul>
+
+<h3>member of</h3>
+
+<ul>
+  <% @user.beer_clubs.each do |club| %>
+    <li>
+      <%= link_to club.name, club %>
+    </li>
+  <% end %>
+</ul>
+
 <div>
   <%= link_to "Edit this user", edit_user_path(@user) %> |
   <%= link_to "Back to users", users_path %>
