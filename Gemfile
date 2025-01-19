@@ -78,3 +78,5 @@ gem "aws-sdk-s3", "~> 1.177", :require => false
 group :development, :test do
   gem 'pry-byebug'
 end
+
+gem 'bcrypt', '~> 3.1.7'
