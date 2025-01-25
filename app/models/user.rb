@@ -21,12 +21,14 @@ class User < ApplicationRecord
 
   def favorite_style
     return nil if beers.empty?
+
     grouped_ratings = ratings.group_by { |r| r.beer.style }
     fav_style_from_ratings(grouped_ratings)
   end
 
   def favorite_brewery
     return nil if beers.empty?
+
     ratings.first.beer.brewery.name
   end
 
@@ -36,7 +38,7 @@ class User < ApplicationRecord
     max_avg_rating = 0
     fav_style = grouped_ratings.keys.first
     grouped_ratings.each do |style, ratings|
-      avg = ratings.sum{|r| r.score}/ratings.count.to_f
+      avg = ratings.sum(&:score) / ratings.count.to_f
       if avg > max_avg_rating
         max_avg_rating = avg
         fav_style = style
