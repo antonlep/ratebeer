@@ -1,6 +1,7 @@
 require 'English'
 LITESTREAM_CONFIG = ENV["LITESTREAM_CONFIG"] || Rails.root.join("tmp/litestream.yml").to_s
 
+# rubocop:disable Naming/HeredocDelimiterNaming
 LITESTREAM_TEMPLATE = <<~EOF.freeze
   # This is the configuration file for litestream.
   #
@@ -18,6 +19,7 @@ LITESTREAM_TEMPLATE = <<~EOF.freeze
           secret-access-key: $AWS_SECRET_ACCESS_KEY
   <% end -%>
 EOF
+# rubocop:enable Naming/HeredocDelimiterNaming
 
 namespace :litestream do
   task prepare: "db:load_config" do
@@ -30,7 +32,9 @@ namespace :litestream do
       .select { |config| ["sqlite3", "litedb"].include? config.adapter }
       .map(&:database)
 
+    # rubocop:disable Security/Eval
     result = eval(Erubi::Engine.new(LITESTREAM_TEMPLATE).src)
+    # rubocop:enable Security/Eval
 
     unless File.exist?(LITESTREAM_CONFIG) && File.read(LITESTREAM_CONFIG) == result
       File.write(LITESTREAM_CONFIG, result)
