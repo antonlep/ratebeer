@@ -69,5 +69,4 @@ class BreweriesController < ApplicationController
   def brewery_params
     params.expect(brewery: [:name, :year])
   end
-
 end

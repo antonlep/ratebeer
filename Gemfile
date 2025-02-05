@@ -69,6 +69,7 @@ group :test do
   gem "selenium-webdriver"
   gem 'rspec-rails', '~> 6.0.0'
   gem 'factory_bot_rails'
+  gem 'webmock'
 end
 
 gem "dockerfile-rails", ">= 1.7", :group => :development
@@ -82,3 +83,5 @@ group :development, :test do
 end
 
 gem 'bcrypt', '~> 3.1.7'
+
+gem 'httparty'
