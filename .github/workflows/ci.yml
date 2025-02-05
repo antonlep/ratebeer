@@ -5,6 +5,9 @@ on:
   push:
     branches: [ main ]
 
+env:
+  BEERMAPPING_APIKEY: "731955affc547174161dbd6f97b46538"
+  
 jobs:
   scan_ruby:
     runs-on: ubuntu-latest
