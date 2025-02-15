@@ -22,6 +22,16 @@ class WeatherstackApi
   #     Place.new(place)
   #   end
   # end
+  def self.current_weather_in(city)
+    city = city.downcase
+    url = "http://api.weatherstack.com/current?access_key=#{key}&query=#{city}"
+    response = HTTParty.get url.to_s
+    weather = response.parsed_response["current"]
+
+    return [] if weather['success'] == false
+
+    weather
+  end
 
   def self.key
     return nil if Rails.env.test? # testatessa ei apia tarvita, palautetaan nil
