@@ -7,7 +7,8 @@ def create_beer_with_rating(object, score)
 end
 
 def create_beer_with_name_style_and_rating(object, name, style, score)
-  beer = FactoryBot.create(:beer, name: name, style: style)
+  test_style = FactoryBot.create(:style, name: style)
+  beer = FactoryBot.create(:beer, name: name, style: test_style)
   FactoryBot.create(:rating, beer: beer, score: score, user: object[:user] )
   beer
 end
@@ -99,17 +100,18 @@ RSpec.describe User, type: :model do
       end
 
       it "is the only one rated if only one rating" do
-        beer = FactoryBot.create(:beer, style: "Lager")
+        test_style = FactoryBot.create(:style, name: "Lager")
+        beer = FactoryBot.create(:beer, style: test_style)
         rating = FactoryBot.create(:rating, beer: beer, user: user)
 
-        expect(user.favorite_style).to eq("Lager")
+        expect(user.favorite_style.name).to eq("Lager")
       end
 
       it "is the one with higher rating if two beers" do
         beer1 = create_beer_with_name_style_and_rating({user: user}, "Koff","Lager", 10)
         beer2 = create_beer_with_name_style_and_rating({user: user}, "Karhu", "Weizen", 20)
 
-        expect(user.favorite_style).to eq("Weizen")
+        expect(user.favorite_style.name).to eq("Weizen")
       end
 
       it "is the one with highest average rating if multiple beers" do
@@ -120,7 +122,7 @@ RSpec.describe User, type: :model do
         beer5 = create_beer_with_name_style_and_rating({user: user}, "Koff3","Weizen", 30)
         beer6 = create_beer_with_name_style_and_rating({user: user}, "Karhu3", "Nonalcohol", 12)
 
-        expect(user.favorite_style).to eq("Weizen")
+        expect(user.favorite_style.name).to eq("Weizen")
       end
     end
     describe "favorite brewery" do
@@ -136,7 +138,8 @@ RSpec.describe User, type: :model do
 
       it "is the only one rated if only one rating" do
         brewery1 = FactoryBot.create(:brewery, name: "Panimo")
-        beer1 = FactoryBot.create(:beer, style: "Lager", brewery: brewery1)
+        style1 = FactoryBot.create(:style, name: "Lager")
+        beer1 = FactoryBot.create(:beer, style: style1, brewery: brewery1)
         rating1 = FactoryBot.create(:rating, beer: beer1, user: user)
 
         expect(user.favorite_brewery).to eq("Panimo")

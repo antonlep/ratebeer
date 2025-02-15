@@ -1,5 +1,5 @@
 class StylesController < ApplicationController
-  before_action :set_style, only: %i[ show edit update destroy ]
+  before_action :set_style, only: %i[show edit update destroy]
 
   # GET /styles or /styles.json
   def index
@@ -58,13 +58,14 @@ class StylesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_style
-      @style = Style.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def style_params
-      params.expect(style: [ :name, :description ])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_style
+    @style = Style.find(params.expect(:id))
+  end
+
+  # Only allow a list of trusted parameters through.
+  def style_params
+    params.expect(style: [:name, :description])
+  end
 end
