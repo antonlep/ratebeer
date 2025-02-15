@@ -6,7 +6,8 @@ on:
     branches: [ main ]
 
 env:
-  BEERMAPPING_APIKEY: "731955affc547174161dbd6f97b46538"
+  BEERMAPPING_APIKEY: ${{ secrets.BEERMAPPING_APIKEY }}
+  WEATHERSTACK_APIKEY: ${{ secrets.WEATHERSTACK_APIKEY }}
   
 jobs:
   scan_ruby:
