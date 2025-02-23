@@ -1,6 +1,9 @@
 <div id="<%= dom_id brewery %>">
   <h2>
     <%= brewery.name %>
+    <% if not brewery.active %>
+      retired
+    <% end %>
   </h2>
 
   <p>

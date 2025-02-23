@@ -15,4 +15,8 @@ class Beer < ApplicationRecord
   def to_s
     "#{brewery.name}, #{name}"
   end
+
+  def self.top(amount)
+    Beer.all.sort_by(&:average_rating).reverse.take(amount)
+  end
 end

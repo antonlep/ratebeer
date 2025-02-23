@@ -13,6 +13,10 @@ class User < ApplicationRecord
                        format: { with: /\A(?=.*\d)(?=.*[A-Z])+.*\z/,
                                  message: "must contain at least one uppercase letter and one number" }
 
+  def self.most_active(amount)
+    User.all.sort_by{ |e| e.ratings.length }.reverse.take(amount)
+  end
+
   def favorite_beer
     return nil if ratings.empty?
 
@@ -30,6 +34,9 @@ class User < ApplicationRecord
     return nil if beers.empty?
 
     ratings.first.beer.brewery.name
+  end
+
+  def most_active
   end
 
   private
