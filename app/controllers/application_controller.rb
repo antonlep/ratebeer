@@ -14,4 +14,8 @@ class ApplicationController < ActionController::Base
   def ensure_that_signed_in
     redirect_to signin_path, notice: 'you should be signed in' if current_user.nil?
   end
+
+  def ensure_that_admin
+    redirect_back fallback_location: root_path, notice: 'you should be admin' unless current_user.admin == true
+  end
 end
