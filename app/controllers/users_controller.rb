@@ -60,6 +60,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def change_status
+    @user = User.find(params[:id])
+    @user.update_attribute(:active, params[:active])
+    redirect_to @user, notice: "User was successfully updated."
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -69,6 +75,7 @@ class UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:username, :password, :password_confirmation)
+    # params.permit(:user, :username, :password, :password_confirmation, :id, :admin, :active, :authenticity_token)
+    params.require(:user).permit(:username, :password, :password_confirmation, :id, :admin, :active)
   end
 end

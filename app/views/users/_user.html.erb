@@ -2,6 +2,11 @@
   <p>
     <strong>Username:</strong>
     <%= user.username %>
+    <% if current_user.admin %>
+      <% unless user.active %>
+      <p>Closed</p>
+    <% end %>
+  <% end %>
   </p>
 
 </div>

@@ -1,9 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
+<%= render @user %>
 <p>
   <% if @user.ratings.empty? %>
     Has not made any ratings yet!
@@ -11,6 +8,16 @@
     Has made <%= pluralize @user.ratings.count, "rating" %>, average rating <%= @user.average_rating %>
   <% end %>
 </p>
+
+
+<% if current_user && current_user.admin %>
+    <% if @user.active %>
+        <%= button_to 'Close account', @user, method: :post, action: :change_status, params: {active: false}%>
+    <% else %>
+        <%= button_to 'Open account', @user, method: :post, action: :change_status, params: {active: true}%>
+    <% end %>
+<% end  %>
+
 <h3>ratings</h3>
 
 <ul>

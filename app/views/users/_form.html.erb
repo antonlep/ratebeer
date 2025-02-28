@@ -28,6 +28,9 @@
     <%= form.password_field :password_confirmation %>
   </div>
 
+  <%= form.hidden_field :admin, :value => false %>
+  <%= form.hidden_field :active, :value => true %>
+
   <div>
     <%= form.submit %>
   </div>
