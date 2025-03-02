@@ -2,7 +2,7 @@
   <p>
     <strong>Username:</strong>
     <%= user.username %>
-    <% if current_user.admin %>
+    <% if current_user && current_user.admin %>
       <% unless user.active %>
       <p>Closed</p>
     <% end %>

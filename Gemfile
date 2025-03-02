@@ -70,6 +70,8 @@ group :test do
   gem 'rspec-rails', '~> 6.0.0'
   gem 'factory_bot_rails'
   gem 'webmock'
+  gem 'launchy'
+  gem 'webdrivers'
 end
 
 gem "dockerfile-rails", ">= 1.7", :group => :development
