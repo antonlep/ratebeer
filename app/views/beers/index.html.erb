@@ -4,11 +4,24 @@
 
 <h1>Beers</h1>
 
-<div id="beers">
+<table>
+  <thead>
+  <tr>
+    <th><%= link_to "Name", beers_path(order: "name")%></th>
+    <th><%= link_to "Style", beers_path(order: "style")%></th>
+    <th><%= link_to "Brewery", beers_path(order: "brewery")%></th>
+    <th><%= link_to "Rating", beers_path(order: "rating")%></th>
+  </tr>
+  </thead>
   <% @beers.each do |beer| %>
-    <%= render beer %>
+    <tr>
+      <td><%= link_to beer.name, beer %></td>
+      <td><%= beer.style %></td>
+      <td><%= beer.brewery.name %></td>
+      <td><%= beer.average_rating %></td>
+    </tr>
   <% end %>
-</div>
+</table>
 
 <p>
   <%= link_to "List of breweries", breweries_path %>
