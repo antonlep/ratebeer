@@ -8,7 +8,8 @@
     Has made <%= pluralize @user.ratings.count, "rating" %>, average rating <%= @user.average_rating %>
   <% end %>
 </p>
-
+<p>Favorite brewery <%= @user.favorite_brewery %></p>
+<p>Favorite beer style <%= @user.favorite_style %></p>
 
 <% if current_user && current_user.admin %>
     <% if @user.active %>
